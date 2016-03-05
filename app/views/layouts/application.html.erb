@@ -7,19 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	  <% if current_user %>
-  登陆用户：<%= current_user.name %> | <%= link_to "注销用户", '/logout', :method => :delete%>
-	  <br>
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation"><a href="/books/new">录入</a></li>
-      <li role="presentation"><a href="/books">书库列表</a></li>
-      <li role="presentation"><a href="/users">用户列表</a></li>
-	   <li role="presentation"><a href="/checkings/new">借还B</a></li>
-    </ul>
-	  <% end %>
+  <span>登陆用户：<%= current_user.name %></span> 
+  <span><%= link_to "| 注销用户", '/logout', :method => :delete%></span>
 
-    <div id="loading">Loading...</div>
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
 
-    <%= yield %>
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"><a href="/books/new">录入</a></li>
+            <li role="presentation"><a href="/books">书库列表</a></li>
+            <li role="presentation"><a href="/users">用户列表</a></li>
+      	    <li role="presentation"><a href="/checkings/new">借还</a></li>
+          </ul>
+    
+
+        <div id="loading" class="col-lg-10 col-lg-offset-1">Loading...</div>
+
+        <%= yield %>
+        
+        </div>
+      </div>
+    </div>
 </body>
 </html>

@@ -2,9 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.header 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap/theme";
+
+* 
 {
-	color:"red";
+	box-sizing: border-box;
 }
 
 .block
@@ -25,9 +29,9 @@
 
 .user-section
 {
-	border-right-style: dashed;
+	border-style: solid;
 	border-color: #9494b8;
-	border-width: 2px;
+	border-width: 1px;
 	width: 25%;
 	float:left;
 }
@@ -40,7 +44,62 @@
 	display: inline;
 }
 
-.highlight
+.horizontal-block
 {
-	color: #c2c2d6;
+	padding-bottom: 10px;
+
+}
+
+.outer-layer
+{
+	box-shadow:2px 3px 5px #000;
+	border-color: #8c8c8c;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 10px;
+	position: relative;
+}
+
+.search-bar
+{
+	clear: right;
+}
+
+.book {
+	height: 100%;
+	display: inline-block;
+	vertical-align: top;
+	height: 160px;
+}
+
+.info
+{
+	border-left: solid;
+	border-right: solid;
+	border-width: 1px;
+}
+
+.title-author
+{
+	font-size: large;
+	font-weight: 900;
+}
+
+.description 
+{
+	padding-top: 10px;
+}
+
+.options
+{
+	position: relative;
+	top:20px
+}
+
+.divider
+{
+	border-top: solid;
+	border-width: 1px;
+	border-color: #BCBCCC;
+	margin-bottom: 10px;
 }

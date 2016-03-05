@@ -12,14 +12,36 @@ class BooksController < ApplicationController
     all_books = Book.order(:title).paginate(page: params[:page], per_page: 10)
     @locations = Location.all
 
-    if params[:keyword] ##search with keyword
+    if params[:searchType] == "keyword" ##search with keyword
       @books = all_books.search(params[:keyword])
-    elsif params[:isbn] ##search with ISBN
-      @books = all_books.search_by_isbn(params[:isbn])
+    elsif params[:searchType] == "isbn" ##search with ISBN
+      @books = all_books.search_by_isbn(params[:searchKey])
     elsif params[:location_id] ##filter by location
       @books = all_books.filter_by_location(params[:location_id])
     else
       @books = all_books
+    end
+  end
+
+  def fetch_books
+    search_hash = {}
+
+    if params[:isbn]
+      search_hash[:isbn] = params[:isbn]
+    end
+
+    if params[:title]
+      search_hash[:title] = params[:title]
+    end 
+
+    if params[:author]
+      search_hash[:author] = params[:author]
+    end
+    
+    @books = Book.where(search_hash).order(:title).paginate(page: params[:page], per_page: 10)
+    
+    respond_to do |format|
+        format.js
     end
   end
 

@@ -24,8 +24,4 @@ $(document).on('page:change', function() {
 $('#loading').hide();
 });
 
-$(document).ready( function() {
-	$('.nav').on('click', 'li', function() {
-		//$(this).hide();
-	});
-});
+

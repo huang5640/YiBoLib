@@ -1,40 +1,27 @@
-<% cache @books do %>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>image</th>
-      <th>标题</th>
-      <th>作者</th>
-      <th>内容简介</th>
-      <th>操作</th>
-      <th>状态</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody class="table-striped">
-    <% @books.each do |book| %>
-      <div class="book-block">
-        <tr>
-        <td><%= image_tag book.image %></td>
-        <td><%= book.title %></td>
-        <td><%= book.author %></td>
-        <td><%= book.description[0, 200] %><a class="detail">...详细</a></td>
-        <td><%= link_to "编辑", edit_book_path(book) %></td>
-        <td><%= link_to '借阅历史', book_history_path(book)%></td>
-
-        <% if book.user%>
-          <%#<td><%= link_to "借还", check_in_path(book)></td>%>
-          <td>已借出</td>
-        <% else %>
-          <%#<td><%= link_to "借还", check_out_path(book)></td>%>
-          <td>在馆</td>
-        <% end %>
-
-        <td><%= link_to "删除", book, method: :delete, data: {confirm: "确认要删除#{book.title}吗？"}%></td>
-      </tr>
+<% @books.each do |book| %>
+  <div class="horizontal-block container">
+    <div class="outer-layer row">
+      <div class="book book-picture col-xs-2"> 
+        <div class="picture">
+          <!-- <img src=<%= book.image%> width="100px" height="150px"> -->
+        </div>
       </div>
-    <% end %>
-  </tbody>
-</table>
+
+      <div class="book info col-xs-8">
+        <div class="title-author">  
+          <h4>《<%= book.title%>》--- <%= book.author.slice(2..-3)%></h4>
+        </div>
+        <div class="description">
+          <p class="word">简介：<%= book.description.slice(0..200)%>...<a>（详细）</a></p>
+        </div>
+      </div>
+
+      <div class="book options col-xs-2">
+        <!-- button_to(name = nil, options = nil, html_options = nil, &block) -->
+        <%= button_to "借阅", book_path(book), method: 'get', remote: true, class: 'btn btn-primary btn-block'%>
+        <%= button_to "历史记录", book_history_path(book), method: 'get', class: 'btn btn-default btn-block'%>
+        <%= button_to "删除", book_path(book), method: 'delete', data: { confirm: "是否确定要删除《#{book.title}》" }, class: 'btn btn-danger btn-block'%>
+      </div>
+    </div>
+  </div>
 <% end %>

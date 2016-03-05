@@ -1,39 +1,47 @@
 <p id="notice"><%= notice %></p>
-
 <p><%= flash[:danger]%></p>
+<h1 class="header">书库</h1>
 
-<h1 class="highlight">书库</h1>
-
-  <div class='row'>
-    <div class='col-sm-12'>
-      <p>
-        <form>
-          <legend>用ISBN搜索</legend>
-          <div class='col-xs-4'>
-            <input type='text' class='form-control' value='<%= params[:isbn] %>' name='isbn' placeholder='ISBN' >
-          </div>
-        </form>
-
-        <form>
-          <legend>搜索书名、作者或简介</legend>
-          <div class='col-xs-4'>
-            <input type='text' class='form-control' value='<%= params[:keyword] %>' name='keyword' placeholder='书名、作者或简介' >
-          </div>
-        </form>
-
-        <div>
-          <legend>根据图书馆分类</legend>
-          <% @locations.each do |location|%>
-            <input type="checkbox"><%= location.name %></input>
-          <% end %>
-        </div>
-      </p>
-    </div>
+<form class="form-inline">
+  <div class="form-group">
+    <label class="control-label">搜索：</label>
   </div>
 
+  <div class="form-group btn-group">
+    <button type="button" 
+            class="btn btn-default dropdown-toggle" 
+            data-toggle="dropdown" 
+            data-type="YiBoNum"
+            aria-haspopup="true" 
+            aria-expanded="false">
+      <span class="text">益博码</span><span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu">
+      <li data-type="YiBoNum"><a>益博码</a></li>
+      <li data-type="isbn"><a>ISBN</a></li>
+      <li data-type="title"><a>书名</a></li>
+      <li data-type="author"><a>作者</a></li>
+      <li data-type="description"><a>内容</a></li>
+      <li data-type="tags"><a>标签</a></li>
+    </ul>
+  </div>
+
+  <div class="form-group search-field">
+    <input type="text" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" id="search-button" type="button" remote="true">搜索</button>
+  </div>
+</form>
+
+<div class="divider"></div>
+
+<div id="books_grid">
+  <%= render 'books'%>
+</div>
+
 <%= will_paginate %>
 
-<%= render 'books'%>
-
-<%= will_paginate %>
 
